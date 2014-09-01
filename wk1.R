@@ -75,11 +75,24 @@ beta1 <- cor(y,x)*sd(x)/sd(y)
 beta0 <- mean(x)-beta1*mean(y)
 rbind(c(beta0,beta1),coef(lm(x~y)))
 
-
-
-
-
-
+# normalizing data
+data(father.son)
+y<- (father.son$sheight - mean(father.son$sheight))/sd(father.son$sheight)
+x<- (father.son$fheight - mean(father.son$fheight))/sd(father.son$fheight)
+rho <- cor(x,y)
+myplot <- function(x,y){
+    plot(x,y,xlab="Father's height,normalizied",
+    ylab="Son's height, normailized",
+    xlim=c(-3,3),ylim=c(-3,3),
+    bg='lightblue',col='black',cex=1.1,pch=21,frame=F)
+}
+png('nor_data.png')
+myplot(x,y)
+abline(0,1)
+abline(0,rho,lwd=2)
+abline(0,1/rho,lwd=2)
+abline(h=0);abline(v=0)
+dev.off()
 
 
 
