@@ -1,0 +1,8 @@
+setwd("C:\\Users\\Ivan.Liuyanfeng\\Desktop\\Data_Mining_Work_Space\\Data-Science-Regression-Models")
+library(UsingR)
+data(galton)
+png('chi_par.png')
+par(mfrow=c(1,2))
+hist(galton$child,col='blue',breaks=100)
+hist(galton$parent,col='blue',breaks=100)
+dev.off()
