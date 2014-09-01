@@ -65,9 +65,15 @@ dev.off()
 # solution
 lm(I(child-mean(child))~I(parent-mean(parent))-1,data=galton)
 
-
-
-
+y <- galton$child
+x <- galton$parent
+beta1 <- cor(y,x)*sd(y)/sd(x)
+beta0 <- mean(y)-beta1*mean(x)
+rbind(c(beta0,beta1),coef(lm(y~x)))
+    #reversing
+beta1 <- cor(y,x)*sd(x)/sd(y)
+beta0 <- mean(x)-beta1*mean(y)
+rbind(c(beta0,beta1),coef(lm(x~y)))
 
 
 
