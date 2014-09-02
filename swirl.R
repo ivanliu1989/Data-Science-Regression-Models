@@ -1,0 +1,4 @@
+library(swirl)
+swirl()
+install_from_swirl("Regression Models")
+Ivan
