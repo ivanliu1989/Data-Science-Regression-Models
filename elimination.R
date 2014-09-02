@@ -19,3 +19,4 @@ eliminate <- function(predictor, dataframe){
   # sapply returns a matrix of residuals; convert to a data frame and return.
   as.data.frame(temp)
 }
+
