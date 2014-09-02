@@ -64,3 +64,30 @@ makelms()
 ec <- swiss$Examination+swiss$Catholic
 efit <- lm(Fertility ~ . + ec, swiss)
 all$coefficients-efit$coefficients
+
+dim(InsectSprays)
+head(InsectSprays,15)
+summary(InsectSprays)
+sapply(InsectSprays, class)
+fit <- lm(count~spray,InsectSprays)
+est <- summary(fit)$coef[,1]
+mean(sB)
+nfit <- lm(count~spray -1 ,InsectSprays)
+summary(nfit)$coef
+spray2 <- relevel(InsectSprays$spray,"C")
+fit2 <- lm(count~spray2,InsectSprays)
+summary(fit2)$coef
+mean(sC)
+(fit$coef[2]-fit$coef[3])/1.6011
+
+
+dim(hunger)
+names(hunger)
+fit <- lm(hunger$Numeric ~ hunger$Year)
+summary(fit)$coef
+lmF <- lm(hunger$Numeric[hunger$Sex=="Female"] ~ hunger$Year[hunger$Sex=="Female"]) 
+lmM <- lm(hunger$Numeric[hunger$Sex=="Male"] ~ hunger$Year[hunger$Sex=="Male"])
+lmBoth <- lm(Numeric ~ Year +Sex, hunger)
+summary(lmBoth)
+lmInter <- lm(Numeric ~ Year+Sex+Sex*Year, hunger)
+summary(lmInter)
