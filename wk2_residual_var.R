@@ -18,4 +18,13 @@ abline(fit, lwd = 2)
 for (i in 1 : n) 
     lines(c(x[i], x[i]), c(y[i], yhat[i]), col = "red" , lwd = 2)
 dev.off()
-
+png('residual2.png')
+plot(diamond$carat, e,  
+     xlab = "Mass (carats)", 
+     ylab = "Residuals (SIN $)", 
+     bg = "lightblue", 
+     col = "black", cex = 1.1, pch = 21,frame = FALSE)
+abline(h = 0, lwd = 2)
+for (i in 1 : n) 
+    lines(c(x[i], x[i]), c(e[i], 0), col = "red" , lwd = 2)
+dev.off()
