@@ -45,3 +45,9 @@ plot(x, y); abline(lm(y ~ x))
 plot(x, resid(lm(y ~ x)));
 abline(h = 0)
 dev.off()
+
+# residual variance
+y <- diamond$price; x <- diamond$carat; n <- length(y)
+fit <- lm(y ~ x)
+summary(fit)$sigma
+sqrt(sum(resid(fit)^2) / (n - 2))
