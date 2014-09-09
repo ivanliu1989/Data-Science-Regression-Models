@@ -37,3 +37,11 @@ plot(x, y); abline(lm(y ~ x))
 plot(x, resid(lm(y ~ x)));
 abline(h = 0)
 dev.off()
+
+# Heteroskedasticity
+x <- runif(100, 0, 6); y <- x + rnorm(100, mean = 0, sd = .001 * x);
+png("residual4.png")
+plot(x, y); abline(lm(y ~ x))
+plot(x, resid(lm(y ~ x)));
+abline(h = 0)
+dev.off()
