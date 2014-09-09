@@ -9,3 +9,9 @@ plot(diamond$carat, diamond$price,
      col = "black", cex = 1.1, pch = 21,frame = FALSE)
 abline(lm(price ~ carat, data = diamond), lwd = 2)
 dev.off()
+
+fit <- lm(price ~ carat, data = diamond)
+coef(fit)
+
+fit2 <- lm(price ~ I(carat - mean(carat)), data = diamond)
+coef(fit2)
