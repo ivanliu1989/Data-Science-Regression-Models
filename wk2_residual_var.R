@@ -46,8 +46,10 @@ plot(x, resid(lm(y ~ x)));
 abline(h = 0)
 dev.off()
 
-# residual variance
+# residual variation
 y <- diamond$price; x <- diamond$carat; n <- length(y)
 fit <- lm(y ~ x)
 summary(fit)$sigma
 sqrt(sum(resid(fit)^2) / (n - 2))
+
+example(anscombe)
