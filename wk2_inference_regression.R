@@ -18,9 +18,34 @@ coefTable
 fit <- lm(y ~ x)
 summary(fit)$coefficients
 
-# confidence interval
+# confidence interval based on standard error
 sumCoef <- summary(fit)$coefficients
 sumCoef[1,1] + c(-1, 1) * qt(.975, df = fit$df) * sumCoef[1, 2]
 sumCoef[2,1] + c(-1, 1) * qt(.975, df = fit$df) * sumCoef[2, 2]
 # With 95% confidence, we estimate that a 0.1 carat increase in diamond size results in a 355.6 to 388.6
 # increase in price in (Singapore) dollars.
+
+# predictions intervals
+png("intervals.png")
+par(mfcol=c(1,1))
+plot(x, y, frame=FALSE,xlab="Carat",ylab="Dollars",pch=21,col="black", bg="lightblue", cex=2)
+abline(fit, lwd = 2)
+xVals <- seq(min(x), max(x), by = .01)
+yVals <- beta0 + beta1 * xVals
+se1 <- sigma * sqrt(1 / n + (xVals - mean(x))^2/ssx)
+se2 <- sigma * sqrt(1 + 1 / n + (xVals - mean(x))^2/ssx)
+lines(xVals, yVals + 2 * se1)
+lines(xVals, yVals - 2 * se1)
+lines(xVals, yVals + 2 * se2)
+lines(xVals, yVals - 2 * se2)
+dev.off()
+
+newdata <- data.frame(x = xVals)
+p1 <- predict(fit, newdata, interval = ("confidence"))
+p2 <- predict(fit, newdata, interval = ("prediction"))
+png("intervals2.png")
+plot(x, y, frame=FALSE,xlab="Carat",ylab="Dollars",pch=21,col="black", bg="lightblue", cex=2)
+abline(fit, lwd = 2)
+lines(xVals, p1[,2]); lines(xVals, p1[,3])
+lines(xVals, p2[,2]); lines(xVals, p2[,3])
+dev.off()
