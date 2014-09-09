@@ -28,3 +28,12 @@ abline(h = 0, lwd = 2)
 for (i in 1 : n) 
     lines(c(x[i], x[i]), c(e[i], 0), col = "red" , lwd = 2)
 dev.off()
+
+# non-linear data
+x <- runif(100, -3, 3); y <- x + sin(x) + rnorm(100, sd = .2);
+png("residual3.png")
+par(mfcol=c(1,2))
+plot(x, y); abline(lm(y ~ x))
+plot(x, resid(lm(y ~ x)));
+abline(h = 0)
+dev.off()
