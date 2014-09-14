@@ -78,3 +78,17 @@ points(hunger$Year,hunger$Numeric,pch=19,col=((hunger$Sex=="Male")*1+1))
 lines(hunger$Year[hunger$Sex=="Male"],lmM$fitted,col="black",lwd=3)
 lines(hunger$Year[hunger$Sex=="Female"],lmF$fitted,col="red",lwd=3)
 dev.off()
+
+lmBoth <- lm(hunger$Numeric ~ hunger$Year + hunger$Sex)
+plot(hunger$Year,hunger$Numeric,pch=19)
+points(hunger$Year,hunger$Numeric,pch=19,col=((hunger$Sex=="Male")*1+1))
+abline(c(lmBoth$coeff[1],lmBoth$coeff[2]),col="red",lwd=3)
+abline(c(lmBoth$coeff[1] + lmBoth$coeff[3],lmBoth$coeff[2] ),col="black",lwd=3)
+
+lmBoth <- lm(hunger$Numeric ~ hunger$Year + hunger$Sex + hunger$Sex*hunger$Year)
+plot(hunger$Year,hunger$Numeric,pch=19)
+points(hunger$Year,hunger$Numeric,pch=19,col=((hunger$Sex=="Male")*1+1))
+abline(c(lmBoth$coeff[1],lmBoth$coeff[2]),col="red",lwd=3)
+abline(c(lmBoth$coeff[1] + lmBoth$coeff[3],lmBoth$coeff[2] +lmBoth$coeff[4]),col="black",lwd=3)
+
+summary(lmBoth)
