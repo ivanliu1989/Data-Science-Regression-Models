@@ -1,0 +1,5 @@
+setwd("C:\\Users\\Ivan.Liuyanfeng\\Desktop\\Data_Mining_Work_Space\\Data-Science-Regression-Models")
+library(datasets); data(swiss); require(stats); require(graphics)
+png("swiss_pairs.png")
+pairs(swiss, panel = panel.smooth, main = "Swiss data", col = 3 + (swiss$Catholic > 50))
+dev.off()
