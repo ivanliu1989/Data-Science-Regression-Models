@@ -57,3 +57,12 @@ p <- pt(-abs(t), df = fit$df)
 out <- c(bbmbc, se, t, p)
 names(out) <- c("B - C", "SE", "T", "P")
 round(out, 3)
+
+download.file("http://apps.who.int/gho/athena/data/GHO/WHOSIS_000008.csv?profile=text&filter=COUNTRY:*;SEX:*","hunger.csv",method="curl")
+hunger <- read.csv("hunger.csv")
+hunger <- hunger[hunger$Sex!="Both sexes",]
+head(hunger)
+lm1 <- lm(hunger$Numeric ~ hunger$Year)
+png("hunger.png")
+plot(hunger$Year,hunger$Numeric,pch=19,col="blue")
+dev.off()
