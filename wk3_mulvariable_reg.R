@@ -99,3 +99,8 @@ points(x1, y, pch = 21, col = "black", bg = co.pal[round((n - 1) * x2 + 1)], cex
 dev.off()
 library(rgl)
 plot3d(x1, x2, y)
+
+png("mulvar7.png")
+plot(resid(lm(x1 ~ x2)), resid(lm(y ~ x2)), frame = FALSE, col = "black", bg = "lightblue", pch = 21, cex = 2)
+abline(lm(I(resid(lm(x1 ~ x2))) ~ I(resid(lm(y ~ x2)))), lwd = 2)
+dev.off()
