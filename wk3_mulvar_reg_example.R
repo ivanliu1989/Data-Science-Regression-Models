@@ -21,3 +21,13 @@ abline(0, coef(lm(y ~ x1 + x2))[2], lwd = 2)
 dev.off()
 par(mfrow = c(1, 1))
 
+z <- swiss$Agriculture + swiss$Education
+lm(Fertility ~ . + z, data = swiss)
+
+require(datasets);data(InsectSprays)
+require(stats); require(graphics)
+png("insect_sprays.png")
+boxplot(count ~ spray, data = InsectSprays,
+        xlab = "Type of spray", ylab = "Insect count",
+        main = "InsectSprays data", varwidth = TRUE, col = "lightgray")
+dev.off()
