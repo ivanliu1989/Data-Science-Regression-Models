@@ -31,3 +31,29 @@ boxplot(count ~ spray, data = InsectSprays,
         xlab = "Type of spray", ylab = "Insect count",
         main = "InsectSprays data", varwidth = TRUE, col = "lightgray")
 dev.off()
+
+summary(lm(count ~ spray, data = InsectSprays))$coef
+summary(lm(count ~
+               I(1 * (spray == 'B')) + I(1 * (spray == 'C')) +
+               I(1 * (spray == 'D')) + I(1 * (spray == 'E')) +
+               I(1 * (spray == 'F'))
+           , data = InsectSprays))$coef
+lm(count ~
+       I(1 * (spray == 'B')) + I(1 * (spray == 'C')) +
+       I(1 * (spray == 'D')) + I(1 * (spray == 'E')) +
+       I(1 * (spray == 'F')) + I(1 * (spray == 'A')), data = InsectSprays)
+summary(lm(count ~ spray - 1, data = InsectSprays))$coef
+
+#Reordering the levels
+spray2 <- relevel(InsectSprays$spray, "C")
+summary(lm(count ~ spray2, data = InsectSprays))$coef
+
+fit <- lm(count ~ spray, data = InsectSprays) #A is ref
+bbmbc <- coef(fit)[2] - coef(fit)[3] #B - C
+temp <- summary(fit)
+se <- temp$sigma * sqrt(temp$cov.unscaled[2, 2] + temp$cov.unscaled[3,3] - 2 *temp$cov.unscaled[2,3])
+t <- (bbmbc) / se
+p <- pt(-abs(t), df = fit$df)
+out <- c(bbmbc, se, t, p)
+names(out) <- c("B - C", "SE", "T", "P")
+round(out, 3)
